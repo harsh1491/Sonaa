@@ -62,7 +62,7 @@
 </head>
 <body>
   <div id="quiz-box">
-    <h2 id="question">Q1. Who's the Cutest ?</h2>
+    <h2 id="question"> Who's the Cutest ?</h2>
     <button class="option-btn" onclick="handleAnswer(1)">Sonaa</button>
     <button class="option-btn" onclick="handleAnswer(2)">Devikaa</button>
     <p id="message"></p>
@@ -89,7 +89,7 @@
       if (currentQuestion === 1) {
         message.textContent = "Kuch bhi choose karo, Cute to tum hi ho 😍";
         setTimeout(() => {
-          document.getElementById("question").textContent = "Q2. Batao Batao?";
+          document.getElementById("question").textContent = "Batao Batao?";
           document.querySelectorAll(".option-btn")[0].textContent = "Momos";
           document.querySelectorAll(".option-btn")[1].textContent = "Aalu ke Parathe";
           message.textContent = "";
@@ -104,7 +104,7 @@
           setTimeout(() => {
             message.textContent = "Ek choose karna hi kyu hai madam. Din me Momos raat me Aalu ke parathe";
             setTimeout(() => {
-              document.getElementById("quiz-box").innerHTML = '<h2>Q3. Mujhe pasand karti ho na? 💕</h2><button class="option-btn" onclick="lastQuestion(1)">Haan</button><button class="option-btn" onclick="lastQuestion(2)">Bilkul</button><p id="message"></p>';
+              document.getElementById("quiz-box").innerHTML = '<h2>Mujhe pasand karti ho na? 💕</h2><button class="option-btn" onclick="lastQuestion(1)">Haan</button><button class="option-btn" onclick="lastQuestion(2)">Bilkul</button><p id="message"></p>';
             }, 7000);
           }, 2000);
         }
@@ -141,3 +141,4 @@
   </script>
 </body>
 </html>
+
