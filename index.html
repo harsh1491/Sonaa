@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fun Quiz</title>
+  <style>
+  body {
+    background: linear-gradient(135deg, #2c003e, #3a0ca3, #7209b7);
+    color: #f8f8f8;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  #quiz-box, #tease-box, #final-page {
+    background: rgba(20, 20, 30, 0.9);
+    padding: 25px;
+    border-radius: 20px;
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 0 20px rgba(255,160,190,0.35);
+    animation: fadeIn 0.8s ease-in-out;
+  }
+  h2 {
+    color: #ff9fba;
+    margin-bottom: 15px;
+    text-shadow: 0 0 8px rgba(255,160,190,0.6);
+  }
+  .option-btn, #continue-btn, #tease-btn {
+    display: block;
+    margin: 12px auto;
+    padding: 12px 22px;
+    background: linear-gradient(135deg, #ff85a2, #ffb0c8);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 0 12px rgba(255,150,180,0.4);
+  }
+  .option-btn:hover, #continue-btn:hover, #tease-btn:hover {
+    transform: scale(1.07);
+    box-shadow: 0 0 20px rgba(255,170,200,0.7);
+  }
+  #message {
+    margin-top: 18px;
+    font-size: 1.1em;
+    color: #ffe3ec;
+    text-shadow: 0 0 5px rgba(255,170,190,0.5);
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+  }
+</style>
+</head>
+<body>
+  <div id="quiz-box">
+    <h2 id="question">Q1. Who's the Cutest ?</h2>
+    <button class="option-btn" onclick="handleAnswer(1)">Sonaa</button>
+    <button class="option-btn" onclick="handleAnswer(2)">Devikaa</button>
+    <p id="message"></p>
+  </div>
+
+  <div id="tease-box" style="display:none;">
+    <h2>Click the button below 👇</h2>
+    <button id="tease-btn">Click me for something</button>
+  </div>
+
+  <div id="final-page" style="display:none;">
+    <p>You’ve reached the end... but this is just the beginning of our forever. ❤️<br>
+        I will love you endlessly, and I can’t wait to spend my life with you. 💍</p>
+  </div>
+
+  <script>
+    let currentQuestion = 1;
+    let chosenFirst = false;
+    let hoverCount = 0;
+
+    function handleAnswer(option) {
+      const message = document.getElementById("message");
+
+      if (currentQuestion === 1) {
+        message.textContent = "Kuch bhi choose karo, Cute to tum hi ho 😍";
+        setTimeout(() => {
+          document.getElementById("question").textContent = "Q2. Batao Batao?";
+          document.querySelectorAll(".option-btn")[0].textContent = "Momos";
+          document.querySelectorAll(".option-btn")[1].textContent = "Aalu ke Parathe";
+          message.textContent = "";
+          currentQuestion = 2;
+        }, 3000);
+      } else if (currentQuestion === 2) {
+        if (!chosenFirst) {
+          message.textContent = "Achha ji mujhe laga dusra option choose karogi😢";
+          chosenFirst = true;
+        } else if (chosenFirst && message.textContent === "Achha ji mujhe laga dusra option choose karogi😢") {
+          message.textContent = "ye bhi galat jawab🤔";
+          setTimeout(() => {
+            message.textContent = "Ek choose karna hi kyu hai madam. Din me Momos raat me Aalu ke parathe";
+            setTimeout(() => {
+              document.getElementById("quiz-box").innerHTML = '<h2>Q3. Mujhe pasand karti ho na? 💕</h2><button class="option-btn" onclick="lastQuestion(1)">Haan</button><button class="option-btn" onclick="lastQuestion(2)">Bilkul</button><p id="message"></p>';
+            }, 7000);
+          }, 2000);
+        }
+      }
+    }
+
+    function lastQuestion(option) {
+      document.getElementById("message").textContent = "Mujhe pata tha 💖";
+      setTimeout(() => {
+        showTeasePage(); // directly go to tease page without "All questions done" page
+      }, 3000);
+    }
+
+    function showTeasePage() {
+      document.getElementById("quiz-box").style.display = "none";
+      document.getElementById("tease-box").style.display = "block";
+
+      const teaseBtn = document.getElementById("tease-btn");
+      teaseBtn.addEventListener("click", moveButton);
+    }
+
+    function moveButton() {
+      const teaseBtn = document.getElementById("tease-btn");
+      if (hoverCount < 3) {
+        const x = Math.random() * 200 - 100;
+        const y = Math.random() * 200 - 100;
+        teaseBtn.style.transform = `translate(${x}px, ${y}px)`;
+        hoverCount++;
+      } else {
+        document.getElementById("tease-box").style.display = "none";
+        document.getElementById("final-page").style.display = "block";
+      }
+    }
+  </script>
+</body>
+</html>
